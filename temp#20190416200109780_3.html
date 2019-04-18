@@ -1,0 +1,198 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Indigo</title>
+    <link href="css/style.css" rel="stylesheet" />
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css" />
+	<script src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
+ 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+	integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+	crossorigin=""/>
+	<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+	integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+	crossorigin=""></script>
+    
+	<script type="text/javascript" src="geoJson/default.js"></script>
+	<script type="text/javascript" src="geoJson/usacounty.js"></script>
+	<script type="text/javascript" src="geoJson/usaborder.js"></script>
+  
+ <style>
+   
+.my-label {
+      all: revert;
+    color: #FFFFFF;
+    font-size:10px;
+    font-weight: bold;
+    fillColor: none;
+    fillOpacity: 0;
+    background-color: none;
+    border-color: none;
+    background: none;
+    border: none;
+    box-shadow: none;
+    margin: 0px;
+    cursor: none;
+    direction: 'center';
+    interactive: false;
+    fill: false;
+} 
+   </style>
+</head>
+
+<body>
+	<input type="hidden" id="lat" name="lat" value="37.030264">
+	<input type="hidden" id="lon" name="lon" value="-95.617822">
+	<input type="hidden" id="saturl" name="saturl" value="https://tiles.telluslabs.com/anomaly_z_2004_2018/tl_chi/20190415/{z}/{x}/{y}.png">
+	<input type="hidden" id="county" name="county" value="MONTGOMERY">
+ 	<input type="hidden" id="countydisplayname" name="countydisplayname" value='MONTGOMERY County, KS'>
+	<input type="hidden" id="ShowCountyName" name="ShowCountyName" value='false'>
+	<input type="hidden" id="MetricCodeForRasterURL" name="MetricCodeForRasterURL" value='TLCHINFHAN'>
+	<input type="hidden" id="PrimaryMapRadiusMiles" name="PrimaryMapRadiusMiles" value='50'>
+
+    <div id="wrapper">
+        <div id="header">
+
+            <div class="header-title">
+				<div class="mini-logo"><img src="images/indigo_marketplace_color.png"></div>
+				
+				<div class="new-headerline">
+                <h1> Geolntelligence Report </h1>
+				<br />
+				<h1><span class="header-sub-text">April 16, 2019</span></h1>
+				 
+				</div>
+          
+            </div>
+                        <div class="logo" style="border:none;"><img src="images/logo.jpg"> </div>
+        </div>
+        <div id="body-wrapper">
+            <div class="body-leftnavi">
+                <div class="left-navi-width">
+                    Company Name: <span class="name"></span>
+                </div>
+
+                <div class="left-navi-width">
+                    Location: <span class="location">1307 Maple Street</span>
+
+                </div>
+                <div class="left-navi-width">
+                    City,State: <span class="location">Coffeyville, KS 67337</span>
+
+                </div>
+                <div class="left-navi-width">
+                    County: <span class="location"> MONTGOMERY</span>
+
+                </div>
+                <div class="left-navi-width">
+                    Primary Contact: <span class="location">---</span>
+
+                </div>
+                <div class="left-navi-width">
+                    Phone: <span class="location"></span>
+
+                </div>
+                <div class="left-navi-width-hr">
+                    Email: <span class="location"></span>
+
+                </div>
+                <div class="hr">
+                    <hr>
+                </div>
+           
+            </div>
+
+            <div class="navi-bodyleft">
+                Indigo uses satellite imagery to track the seasonal progression of crops in key production areas around the world. However, no place matters more to your business than the production area around your facility. Indigo will provide you with a monthly GeoIntelligence report to bring you our insights from space about how production is progressing for your facility.
+                <br>
+                <br> [Buyer-type relate language]. Indigo understands that the more you know about your production area the better you will be able to get the grain you require at the best price.
+
+            </div>
+
+            <div class="indigo-stanton-mine">
+                 <div class="indigo-stanton-left-img" id="mapid">
+				</div>
+                <div class="indigo-stanton-right-text">
+                    <h1>MONTGOMERY County, KS</h1>
+                    <!--<h3>April 16, 2019</h3>-->
+					<div id="legend1" style="display:none">
+						 <p>&nbsp;IN: Crop Health Index</p>
+						<div class="indigo-scalable"><img src="images/scale-greed2.jpg"></div>
+					</div>
+					
+					<div id="legend2" style="display:none"> 
+					<p>&nbsp;Standar Deviations From Norm</p>
+					<div class="indigo-scalable"><img src="images/scale-greed.jpg"></div>
+					</div>
+
+                    <div class="navi-bodyleft2">
+
+                        <div class="br-space"></div>
+                        <div class="reno-county-one">
+                            <p>Canopy Crop Health</p>
+                            <p>Growing Degree Days</p>
+							 <span class="superscript-text"><i>January 1 - April 16</i></span>
+                            <p> Cumulative Precip</p>
+							<span class="superscript-text"><i>January 1 - April 16</i></span>
+
+                        </div>
+
+                        <div class="latest-season">
+                            <div class="indigo-last-season">LAST SEASON</div>
+                            <p id="p1-last">0.101</p>
+                            <p id="p2-last">852.1</p>
+                            <p id="p3-last">385.7</p>
+
+                        </div>
+                        <div class="this-season">
+                            <div class="indigo-this-season">THIS SEASON</div>
+                            <p id="p1-this">0.134<span id="up1" style="display:none"><img src="images/up.JPG"></span><span id="down1" style="display:none"><img src="images/down.JPG"></span></p>
+                            <p id="p2-this">575.1<span id="up2" style="display:none"><img src="images/up.JPG"></span><span id="down2" style="display:none"><img src="images/down.JPG"></span></p>
+                            <p id="p3-this">153.8<span id="up3" style="display:none"><img src="images/up.JPG"></span><span id="down3" style="display:none"><img src="images/down.JPG"></span></p>
+
+                        </div>
+ 
+                        <div class="indigo-middle-text">
+                            While crop health is on par with last year, 2019 has experienced significantly fewer growing degree days and less precipitation than 2018 had.</div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="indigo-crop-health-mine">
+                <div class="indigo-crop-health-left-img" id="usamapid"></div>
+
+                <div class="indigo-crop-health-right-text">
+                    Indigo's proprietary <b>Crop Health index(CHI)</b> uses daily satellite imagery to assess the the greenness or chlorophyll content an density of a crop's canopy. Intensity of canopy greenness correlates strongly with overall crop biomass and yield.<br><br>
+					
+					Crop health anomalies indicate a positive or negative deviations in canopy health from the 10-year average.
+                </div>
+            </div>
+
+            <div class="indigo-what-next-mine">
+                <h1>What's Next</h1>
+                <div class="indigo-what-next-mine-text">
+					<div class="next-logo"><img src="images/Next-logo.png"></div>
+                    Indigo will produce a monthly GeoIntelligence report bringing insights we see from space to our value customers. Over the course of the 2019 season we plan to cover key stage of corn, soy and wheat including topics such as emergence, estimated acres planted, flooding, yield forecasts and other supply-related topics relevant to the location of your facility.
+					
+
+                </div>
+              
+            </div>
+        </div>
+
+        <div id="footer">
+            <div class="footer-link">50 South B.B.KingBlvd  <span class="footer-line-color">|</span> Memphis,TN 38103  <span class="footer-line-color">|</span>  (844) 828-0240  <span class="footer-line-color">|</span>  info@indigoag.com <span class="footer-line-color">|</span>  www.IndigoAg.com</div>
+            <span class="footer-small-logo"><img src="images/footer-logo.jpg"></span>
+        </div>
+
+    </div>
+</body>
+<script>
+DisplayArrows();
+DrawTilesMap();
+DrawUSAMap();
+</script>
+</html>

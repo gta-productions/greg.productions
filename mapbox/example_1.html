@@ -13,26 +13,17 @@
 	<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
 	integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
 	crossorigin=""></script>
-
+    
 	<script type="text/javascript" src="geoJson/default.js"></script>
 	<script type="text/javascript" src="geoJson/usacounty.js"></script>
 	<script type="text/javascript" src="geoJson/usaborder.js"></script>
-
-  <!-- Add LAto Font -->
-  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-
-  <style type="text/css">
-  body {
-    font-family: 'Lato', sans-serif;
-  }
-  </style>
-
+  
  <style>
-
-.my-label {
-      all: revert;
-    color: #FFFFFF;
-    font-size:10px;
+   
+.county-label-black {
+    all: revert;
+    color: #000000;
+    font-size:12px;
     font-weight: bold;
     fillColor: none;
     fillOpacity: 0;
@@ -46,70 +37,88 @@
     direction: 'center';
     interactive: false;
     fill: false;
-}
+} 
+.county-label-white {
+    all: revert;
+    color: #FFFFFF;
+    font-size:12px;
+    font-weight: bold;
+    fillColor: none;
+    fillOpacity: 0;
+    background-color: none;
+    border-color: none;
+    background: none;
+    border: none;
+    box-shadow: none;
+    margin: 0px;
+    cursor: none;
+    direction: 'center';
+    interactive: false;
+    fill: false;
+} 
    </style>
 </head>
 
 <body>
-	<input type="hidden" id="lat" name="lat" value="36.409479">
-	<input type="hidden" id="lon" name="lon" value="-97.872601">
-	<input type="hidden" id="saturl" name="saturl" value="https://tiles.telluslabs.com/anomaly_z_2004_2018/tl_chi/20190415/{z}/{x}/{y}.png">
-	<input type="hidden" id="county" name="county" value="GARFIELD">
- 	<input type="hidden" id="countydisplayname" name="countydisplayname" value='GARFIELD County, OK'>
-	<input type="hidden" id="ShowCountyName" name="ShowCountyName" value='false'>
+	<input type="hidden" id="lat" name="lat" value="38.842448">
+	<input type="hidden" id="lon" name="lon" value="-97.606254">
+	<input type="hidden" id="saturl" name="saturl" value="https://tiles.telluslabs.com/anomaly_z_2004_2018/tl_chi/20190421/{z}/{x}/{y}.png">
+	<input type="hidden" id="county" name="county" value="SALINE">
+ 	<input type="hidden" id="countydisplayname" name="countydisplayname" value='SALINE County, KS'>
+	<input type="hidden" id="ShowCountyName" name="ShowCountyName" value='true'>
 	<input type="hidden" id="MetricCodeForRasterURL" name="MetricCodeForRasterURL" value='TLCHINFHAN'>
-	<input type="hidden" id="PrimaryMapRadiusMiles" name="PrimaryMapRadiusMiles" value='50'>
+	<input type="hidden" id="PrimaryMapRadiusMiles" name="PrimaryMapRadiusMiles" value='75'>
 
     <div id="wrapper">
         <div id="header">
 
             <div class="header-title">
 				<div class="mini-logo"><img src="images/indigo_marketplace_color.png"></div>
-
+				
 				<div class="new-headerline">
                 <h1> Geolntelligence Report </h1>
 				<br />
-				<h1><span class="header-sub-text">April 16, 2019</span></h1>
-
+				<h1><span class="header-sub-text">April 22, 2019</span></h1>
+				 
 				</div>
-
+          
             </div>
                         <div class="logo" style="border:none;"><img src="images/logo.jpg"> </div>
         </div>
         <div id="body-wrapper">
             <div class="body-leftnavi">
                 <div class="left-navi-width">
-                    Company Name: <span class="name">ADM Enid</span>
+                    Company Name: <span class="name"></span>
                 </div>
 
                 <div class="left-navi-width">
-                    Location: <span class="location">1301 N 4th Str</span>
+                    Location: <span class="location">300 East Ash Street</span>
 
                 </div>
                 <div class="left-navi-width">
-                    City, State, Zip: <span class="location">Enid, OK 73701</span>
+                    City, State, Zip: <span class="location">Salina, KS, 67401</span>
 
                 </div>
                 <div class="left-navi-width">
-                    County: <span class="location"> Garfield</span>
+                    County: <span class="location"> SALINE</span>
 
                 </div>
                 <div class="left-navi-width">
-                    Primary Contact: <span class="location">Jason Tilley</span>
+                    Primary Contact: <span class="location">Steve Storniolo</span>
 
                 </div>
                 <div class="left-navi-width">
-                    Phone: <span class="location">580-237-8000</span>
+                    Phone: <span class="location">785-825-1541</span>
 
                 </div>
                 <div class="left-navi-width-hr">
-                    Email: <span class="location">jason.tilley@adm.com</span>
+                    Email: <span class="location">steve.storniolo@adm.com</span>
 
                 </div>
                 <div class="hr">
                     <hr>
                 </div>
-
+           
             </div>
 
             <div class="navi-bodyleft">
@@ -123,14 +132,14 @@
                  <div class="indigo-stanton-left-img" id="mapid">
 				</div>
                 <div class="indigo-stanton-right-text">
-                    <h1>GARFIELD County, OK</h1>
-                    <!--<h3>April 16, 2019</h3>-->
+                    <h1>SALINE County, KS</h1>
+                    <!--<h3>April 22, 2019</h3>-->
 					<div id="legend1" style="display:none">
 						 <p>&nbsp;IN: Crop Health Index</p>
 						<div class="indigo-scalable"><img src="images/scale-greed2.jpg"></div>
 					</div>
-
-					<div id="legend2" style="display:none">
+					
+					<div id="legend2" style="display:none"> 
 					<p>&nbsp;Standar Deviations From Norm</p>
 					<div class="indigo-scalable"><img src="images/scale-greed.jpg"></div>
 					</div>
@@ -141,29 +150,28 @@
                         <div class="reno-county-one">
                             <p>Canopy Crop Health</p>
                             <p>Growing Degree Days</p>
-							 <span class="superscript-text"><i>Sep 15 - April 16</i></span>
+							 <span class="superscript-text"><i>January 1 - April 22</i></span>
                             <p> Cumulative Precip</p>
-							<span class="superscript-text"><i>Sep 15 - April 16</i></span>
+							<span class="superscript-text"><i>January 1 - April 22</i></span>
 
                         </div>
 
                         <div class="latest-season">
-                            <div class="indigo-last-season">LAST SEASON</div>
-                            <p id="p1-last">0.228</p>
-                            <p id="p2-last">987.4</p>
-                            <p id="p3-last">231</p>
+                            <div class="indigo-last-season">LAST<br> SEASON</div>
+                            <p id="p1-last">0.163</p>
+                            <p id="p2-last">754.4</p>
+                            <p id="p3-last">250.4</p>
 
                         </div>
-                        <div class="this-season">
-                            <div class="indigo-this-season">THIS SEASON</div>
-                            <p id="p1-this">0.311<span id="up1" style="display:none"><img src="images/up.JPG"></span><span id="down1" style="display:none"><img src="images/down.JPG"></span></p>
-                            <p id="p2-this">630.7<span id="up2" style="display:none"><img src="images/up.JPG"></span><span id="down2" style="display:none"><img src="images/down.JPG"></span></p>
-                            <p id="p3-this">111.8<span id="up3" style="display:none"><img src="images/up.JPG"></span><span id="down3" style="display:none"><img src="images/down.JPG"></span></p>
-
+                       <div class="this-season">
+                            <div class="indigo-this-season">THIS<br> SEASON</div>
+                            <p id="p1-this">0.201</p>
+                            <p id="p2-this">474.1</p>
+                            <p id="p3-this">157.9</p>
                         </div>
-
+ 
                         <div class="indigo-middle-text">
-                            While crop health is on par with last year, 2019 has experienced significantly fewer growing degree days and less precipitation than 2018 had.</div>
+                            Crop health anomalies (shown on the map as green or red) indicate positive or negative changes in canopy crop health from the 10-year average.</div>
 
                     </div>
 
@@ -174,21 +182,21 @@
                 <div class="indigo-crop-health-left-img" id="usamapid"></div>
 
                 <div class="indigo-crop-health-right-text">
-                    Indigo's proprietary <b>Crop Health index(CHI)</b> uses daily satellite imagery to assess the the greenness or chlorophyll content an density of a crop's canopy. Intensity of canopy greenness correlates strongly with overall crop biomass and yield.<br><br>
-
-					Crop health anomalies indicate a positive or negative deviations in canopy health from the 10-year average.
+                    Indigo's proprietary <b>Crop Health index (CHI)</b> uses daily satellite imagery to assess the greenness or chlorophyll content and density of a crop's canopy. Intensity of canopy greenness correlates strongly with overall crop biomass and yield.<br><br>
+					
+					Other measurements like NDVI can be useful, but they only measure generic vegetation. Indigo's CHI is built specifically to measure agricultural crop health.
                 </div>
             </div>
 
             <div class="indigo-what-next-mine">
                 <h1>What's Next</h1>
                 <div class="indigo-what-next-mine-text">
-					<div class="next-logo"><img src="images/Next-logo.png"></div>
+					<div class="next-logo"><img src="images/atlas-logo.png"></div>
                     Indigo will produce a monthly GeoIntelligence report bringing insights we see from space to our value customers. Over the course of the 2019 season we plan to cover key stage of corn, soy and wheat including topics such as emergence, estimated acres planted, flooding, yield forecasts and other supply-related topics relevant to the location of your facility.
-
+					
 
                 </div>
-
+              
             </div>
         </div>
 
@@ -200,7 +208,7 @@
     </div>
 </body>
 <script>
-//DisplayArrows();
+DisplayNA();
 DrawTilesMap();
 DrawUSAMap();
 </script>
